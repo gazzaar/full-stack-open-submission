@@ -13,11 +13,17 @@ const Feedback = (props) => {
   );
 };
 
-const StatisticLine = ({ text, value }) => (
-  <p>
-    {text}: {value}
-  </p>
-);
+const StatisticLine = ({ text, value }) => {
+  return (
+    <>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    </>
+  );
+};
+
 const Statistics = (props) => {
   const { good, neutral, bad } = props;
   let all = good + neutral + bad;
@@ -29,7 +35,7 @@ const Statistics = (props) => {
     return (
       <>
         <h2>statistics</h2>
-        <StatisticLine text='No feedback given' />
+        <p>No feedback given</p>
       </>
     );
   }
@@ -37,15 +43,19 @@ const Statistics = (props) => {
   return (
     <>
       <h2>statistics</h2>
-      <StatisticLine text='good' value={good} />
-      <StatisticLine text='neutral' value={neutral} />
-      <StatisticLine text='bad' value={bad} />
-      <StatisticLine text='all' value={all} />
-      <StatisticLine text='average' value={average ? average : 0} />
-      <StatisticLine
-        text='positive'
-        value={positivePercentage ? ` ${positivePercentage} % ` : 0}
-      />
+      <table>
+        <tbody>
+          <StatisticLine text='good' value={good} />
+          <StatisticLine text='neutral' value={neutral} />
+          <StatisticLine text='bad' value={bad} />
+          <StatisticLine text='all' value={all} />
+          <StatisticLine text='average' value={average ? average : 0} />
+          <StatisticLine
+            text='positive'
+            value={positivePercentage ? ` ${positivePercentage} % ` : 0}
+          />
+        </tbody>
+      </table>
     </>
   );
 };
