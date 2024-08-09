@@ -13,7 +13,7 @@ const Feedback = (props) => {
   );
 };
 
-const StaticLine = ({ text, value }) => (
+const StatisticLine = ({ text, value }) => (
   <p>
     {text}: {value}
   </p>
@@ -29,7 +29,7 @@ const Statistics = (props) => {
     return (
       <>
         <h2>statistics</h2>
-        <StaticLine text='No feedback given' />
+        <StatisticLine text='No feedback given' />
       </>
     );
   }
@@ -37,12 +37,12 @@ const Statistics = (props) => {
   return (
     <>
       <h2>statistics</h2>
-      <StaticLine text='good' value={good} />
-      <StaticLine text='neutral' value={neutral} />
-      <StaticLine text='bad' value={bad} />
-      <StaticLine text='all' value={all} />
-      <StaticLine text='average' value={average ? average : 0} />
-      <StaticLine
+      <StatisticLine text='good' value={good} />
+      <StatisticLine text='neutral' value={neutral} />
+      <StatisticLine text='bad' value={bad} />
+      <StatisticLine text='all' value={all} />
+      <StatisticLine text='average' value={average ? average : 0} />
+      <StatisticLine
         text='positive'
         value={positivePercentage ? ` ${positivePercentage} % ` : 0}
       />
