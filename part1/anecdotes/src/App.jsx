@@ -25,13 +25,28 @@ const App = () => {
       return newVote;
     });
   };
-  console.log(vote);
+
+  let index;
+  const handleMostVotes = () => {
+    let biggestVote = 0;
+    vote.forEach((item, i) => {
+      if (item > biggestVote) {
+        biggestVote = item;
+        index = i;
+      }
+    });
+    return biggestVote;
+  };
+  handleMostVotes();
 
   return (
     <>
+      <h1>Anecdotes of the day</h1>
       <div>{anecdotes[selected]}</div>
       <button onClick={handleVotes}>vote</button>
       <button onClick={handleRandom}>next anecdotes</button>
+      <h2>Anecdotes with most votes</h2>
+      <div>{anecdotes[index]}</div>
     </>
   );
 };
