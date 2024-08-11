@@ -1,17 +1,30 @@
 import { useState } from 'react';
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: 'Arto Hellas' }]);
+  const [persons, setPersons] = useState([
+    { name: 'Fathy Elgazzar', number: '' },
+  ]);
   const [newName, setNewName] = useState('');
+  const [phone, setPhone] = useState('');
+
   const handleNewName = (event) => {
     setNewName(event.target.value);
   };
   const handleSubmitName = (event) => {
     event.preventDefault();
     if (!handleExistingName(newName)) {
-      setPersons([...persons, { name: newName }]);
+      if (!newName) {
+        alert('please enter the name');
+        return;
+      }
+      setPersons([...persons, { name: newName, number: phone }]);
     }
     setNewName('');
+    setPhone('');
+  };
+
+  const handlePhone = (event) => {
+    setPhone(event.target.value);
   };
 
   const handleExistingName = (value) => {
@@ -32,6 +45,9 @@ const App = () => {
           name: <input value={newName} onChange={handleNewName} />
         </div>
         <div>
+          phone number: <input value={phone} onChange={handlePhone} />
+        </div>
+        <div>
           <button type='submit' onClick={handleSubmitName}>
             add
           </button>
@@ -39,7 +55,11 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map((person) => {
-        return <h3 key={person.name}>{person.name}</h3>;
+        return (
+          <h3 key={person.name}>
+            {person.name} {person.number}
+          </h3>
+        );
       })}
     </div>
   );
