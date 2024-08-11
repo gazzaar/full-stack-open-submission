@@ -8,8 +8,20 @@ const App = () => {
   };
   const handleSubmitName = (event) => {
     event.preventDefault();
-    setPersons([...persons, { name: newName }]);
+    if (!handleExistingName(newName)) {
+      setPersons([...persons, { name: newName }]);
+    }
     setNewName('');
+  };
+
+  const handleExistingName = (value) => {
+    const exist = persons.some((person) => {
+      if (person.name.trim() == value.trim()) {
+        alert(`${value} is already added to phonebook`);
+        return true;
+      }
+    });
+    return exist;
   };
 
   return (
