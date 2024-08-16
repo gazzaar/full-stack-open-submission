@@ -20,10 +20,15 @@ const App = () => {
         alert('please enter the name');
         return;
       }
-      setPersons([
-        ...persons,
-        { name: newName, number: phone, id: persons.length + 1 },
-      ]);
+
+      axios
+        .post('http://localhost:3001/persons', { name: newName, number: phone })
+        .then((response) => {
+          setPersons([
+            ...persons,
+            { name: response.data.name, number: response.data.number },
+          ]);
+        });
     }
     setNewName('');
     setPhone('');
