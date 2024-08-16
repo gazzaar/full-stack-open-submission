@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import Search from './components/Search';
 import NewPeople from './components/NewPeople';
 import Persons from './components/Persons';
-import axios from 'axios';
-
+import phonebook from './services/phonebook';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
@@ -20,18 +19,15 @@ const App = () => {
         alert('please enter the name');
         return;
       }
-
-      axios
-        .post('http://localhost:3001/persons', { name: newName, number: phone })
-        .then((response) => {
-          setPersons([
-            ...persons,
-            { name: response.data.name, number: response.data.number },
-          ]);
-        });
+      phonebook.create({ name: newName, number: phone }).then((response) => {
+        setPersons([
+          ...persons,
+          { name: response.data.name, number: response.data.number },
+        ]);
+        setNewName('');
+        setPhone('');
+      });
     }
-    setNewName('');
-    setPhone('');
   };
 
   const handlePhone = (event) => {
@@ -58,7 +54,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons').then((resolve) => {
+    phonebook.getAll().then((resolve) => {
       setPersons(resolve.data);
     });
   }, []);
