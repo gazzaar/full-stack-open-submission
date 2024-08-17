@@ -3,11 +3,13 @@ import Search from './components/Search';
 import NewPeople from './components/NewPeople';
 import Persons from './components/Persons';
 import phonebook from './services/phonebook';
+import Notification from './components/Notification';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [phone, setPhone] = useState('');
   const [filter, setFilter] = useState('');
+  const [message, setMessage] = useState(null);
 
   const handleNewName = (event) => {
     setNewName(event.target.value);
@@ -30,7 +32,11 @@ const App = () => {
         ]);
         setNewName('');
         setPhone('');
+        setMessage(`Added ${response.data.name}`);
       });
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000);
     }
   };
 
@@ -63,6 +69,10 @@ const App = () => {
         .remove(id)
         .then((resolve) => {
           setPersons(persons.filter((person) => person.id !== resolve.data.id));
+          setMessage(`deleted ${resolve.data.name}`);
+          setTimeout(() => {
+            setMessage(null);
+          }, 3000);
         })
         .catch((error) => {
           console.log(error);
@@ -80,6 +90,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Search onChange={handleFilter} />
+      <Notification message={message} />
       <h2>add a new</h2>
       <NewPeople
         newName={newName}
