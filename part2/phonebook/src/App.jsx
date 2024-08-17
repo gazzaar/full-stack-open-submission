@@ -22,7 +22,11 @@ const App = () => {
       phonebook.create({ name: newName, number: phone }).then((response) => {
         setPersons([
           ...persons,
-          { name: response.data.name, number: response.data.number },
+          {
+            name: response.data.name,
+            number: response.data.number,
+            id: response.data.id,
+          },
         ]);
         setNewName('');
         setPhone('');
@@ -53,11 +57,24 @@ const App = () => {
     return modifiedName.includes(filter);
   });
 
+  const handleRmove = (name, id) => {
+    if (window.confirm(`DO you sure u want to delte ${name}`)) {
+      phonebook
+        .remove(id)
+        .then((resolve) => {
+          setPersons(persons.filter((person) => person.id !== resolve.data.id));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   useEffect(() => {
     phonebook.getAll().then((resolve) => {
       setPersons(resolve.data);
     });
-  }, [persons]);
+  }, []);
 
   return (
     <div>
@@ -72,7 +89,7 @@ const App = () => {
         onClick={handleSubmitName}
       />
       <h2>Numbers</h2>
-      <Persons filteredArray={filteredPersons} />
+      <Persons onClick={handleRmove} filteredArray={filteredPersons} />
     </div>
   );
 };
