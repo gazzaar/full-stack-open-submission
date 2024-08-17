@@ -57,7 +57,7 @@ const App = () => {
     phonebook.getAll().then((resolve) => {
       setPersons(resolve.data);
     });
-  }, []);
+  }, [persons]);
 
   return (
     <div>
