@@ -6,16 +6,18 @@ const NewPeople = ({
   onClick,
 }) => {
   return (
-    <form>
-      <div>
-        name: <input value={newName} onChange={onChangeName} />
+    <form className='form'>
+      <div className='input-container'>
+        <label htmlFor='name'>Name:</label>
+        <input id='name' value={newName} onChange={onChangeName} />
       </div>
-      <div>
-        phone number: <input value={phone} onChange={onChangePhone} />
+      <div className='input-container'>
+        <label htmlFor='phone'>Phone Number:</label>
+        <input value={phone} id='phone' onChange={onChangePhone} />
       </div>
-      <div>
-        <button type='submit' onClick={onClick}>
-          add
+      <div className='input-container'>
+        <button className='btn btn-add' type='submit' onClick={onClick}>
+          Add
         </button>
       </div>
     </form>

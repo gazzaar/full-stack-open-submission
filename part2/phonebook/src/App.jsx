@@ -69,7 +69,7 @@ const App = () => {
         .remove(id)
         .then((resolve) => {
           setPersons(persons.filter((person) => person.id !== resolve.data.id));
-          setMessage(`deleted ${resolve.data.name}`);
+          setMessage(`Deleted ${resolve.data.name}`);
           setTimeout(() => {
             setMessage(null);
           }, 3000);
@@ -88,10 +88,10 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2 className='heading-primary'>Phonebook</h2>
       <Search onChange={handleFilter} />
       <Notification message={message} />
-      <h2>add a new</h2>
+      <h2 className='heading-secondary'>Add a new</h2>
       <NewPeople
         newName={newName}
         onChangeName={handleNewName}
@@ -99,7 +99,7 @@ const App = () => {
         onChangePhone={handlePhone}
         onClick={handleSubmitName}
       />
-      <h2>Numbers</h2>
+      <h2 className='heading-secondary'>Numbers</h2>
       <Persons onClick={handleRmove} filteredArray={filteredPersons} />
     </div>
   );

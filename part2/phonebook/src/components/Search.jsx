@@ -3,7 +3,8 @@ const Search = ({ onChange }) => {
     <form>
       <div>
         {' '}
-        filter shown with: <input type='text' onChange={onChange} />
+        <label htmlFor='filter'>Filter shown with:</label>{' '}
+        <input type='text' id='filter' onChange={onChange} />
       </div>
     </form>
   );
